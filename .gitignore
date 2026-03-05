@@ -1,0 +1,5 @@
+train_images/
+*.h5
+*.csv
+__pycache__/
+*.pyc

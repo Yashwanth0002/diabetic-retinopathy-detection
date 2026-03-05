@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retinopathy Detection</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://example.com/retina-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
+            margin-bottom: 3rem;
+        }
+        .upload-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .disease-stages {
+            margin-top: 3rem;
+        }
+        .stage-card {
+            border-left: 4px solid #0d6efd;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4">Diabetic Retinopathy Detection</h1>
+            <p class="lead">Early detection for better vision outcomes</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Upload Section -->
+        <div class="upload-container bg-white">
+            <h2 class="text-center mb-4">Upload Retinal Image</h2>
+            
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="alert alert-warning">
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+           <form method="POST" action="/predict" enctype="multipart/form-data" id="uploadForm">
+                <div class="mb-3">
+                    <input class="form-control" type="file" name="file" accept="image/*" required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">Analyze Image</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Disease Information -->
+        <div class="disease-stages">
+            <h2 class="text-center mb-4">Stages of Diabetic Retinopathy</h2>
+            
+            <div class="stage-card p-3">
+                <h4>No Diabetic Retinopathy</h4>
+                <p>No abnormalities detected in the retinal image.</p>
+            </div>
+            
+            <div class="stage-card p-3">
+                <h4>Mild Nonproliferative Retinopathy</h4>
+                <p>Microaneurysms only - small areas of balloon-like swelling in the retina's blood vessels.</p>
+            </div>
+            
+            <div class="stage-card p-3">
+                <h4>Moderate Nonproliferative Retinopathy</h4>
+                <p>More extensive abnormalities including bleeding in the retina.</p>
+            </div>
+            
+            <div class="stage-card p-3">
+                <h4>Severe Nonproliferative Retinopathy</h4>
+                <p>More blood vessels are blocked, depriving areas of the retina of blood supply.</p>
+            </div>
+            
+            <div class="stage-card p-3">
+                <h4>Proliferative Retinopathy</h4>
+                <p>Most advanced stage - new blood vessels grow, which are fragile and can leak blood.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+            <p>Retinopathy Detection System &copy; 2023</p>
+            <a href="/precautions" class="text-white">Prevention Tips</a>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
